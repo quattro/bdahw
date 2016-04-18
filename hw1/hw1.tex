@@ -13,6 +13,17 @@
 \maketitle
 
 \section*{1 (a)}
+Let $N_x = \sum_i^n x_i$ denote the number of ``successes'' observed. We can write the
+likelihood of $p$ as \[ \mathcal{L}(p| X) = {n \choose N_x} p^{N_x} (1 - p)^{n - N_x}.\] In order
+to find the MLE estimate of the likelihood we perform the equivalent operation of maximizing the
+log-likelihood, defined as \[\ell(p | X) = N_x \log p + (n - N_x) \log (1 - p) + O(1),\] whose
+derivative is given by, \[ \frac{d \ell}{d p} = \frac{N_x}{p} - \frac{n - N_x}{1 - p}.\] Setting
+equal to 0 and solving we see,
+\begin{align*}
+    \frac{N_x - pn}{p(1 - p)} = 0 \Leftrightarrow 
+    \frac{N_x}{n} = p \Leftrightarrow 
+    \hat{p} = \frac{\sum_i^n x_i}{n}.
+\end{align*}
 \section*{1 (b)}
 \section*{1 (c)}
 \section*{1 (d)}
