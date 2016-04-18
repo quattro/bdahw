@@ -2,6 +2,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amsfonts,amsthm,amssymb,amsopn}
 
+\def\E{\mathbb{E}}
 \def\N{\mathcal{N}}
 \def\I{\mathbb{I}}
 
@@ -24,7 +25,19 @@ equal to 0 and solving we see,
     \frac{N_x}{n} = p \Leftrightarrow 
     \hat{p} = \frac{\sum_i^n x_i}{n}.
 \end{align*}
+
 \section*{1 (b)}
+The second derivative of the log-likelihood is given as, 
+\[ \frac{d^2 \ell}{d p^2} = \frac{-N_x}{p^2} - \frac{n - N_x}{(1 - p)^2}.\] Therefore, we can
+compute the Fisher Information as
+\begin{align*}
+    I_n(p) = -\E\left[\frac{-N_x}{p^2} - \frac{n - N_x}{(1 - p)^2} \middle\rvert p \right] &= 
+    \E\left[\frac{N_x}{p^2} + \frac{n - N_x}{(1 - p)^2} \middle\rvert p \right]\\
+    &= \E\left[\frac{N_x}{p^2} \middle\rvert p\right] + \E\left[\frac{n - N_x}{(1 - p)^2} \middle\rvert p \right] \\
+    &= \frac{n p}{p^2} + \frac{n (1 - p)}{(1 - p)^2}\\
+    &= \frac{n}{p} + \frac{n}{1 - p} \\
+    &= \frac{n}{p(1 - p)}.
+\end{align*}
 \section*{1 (c)}
 \section*{1 (d)}
 \section*{1 (e)}
