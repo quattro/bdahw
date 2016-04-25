@@ -16,7 +16,7 @@
 \section*{1 (a)}
 Let $N_x = \sum_i^n x_i$ denote the number of ``successes'' observed. We can write the
 likelihood of $p$ as \[ \mathcal{L}(p| X) = {n \choose N_x} p^{N_x} (1 - p)^{n - N_x}.\] In order
-to find the MLE estimate of the likelihood we perform the equivalent operation of maximizing the
+to find the ML-estimate of the likelihood we perform the equivalent operation of maximizing the
 log-likelihood, defined as \[\ell(p | X) = N_x \log p + (n - N_x) \log (1 - p) + O(1),\] whose
 derivative is given by, \[ \frac{d \ell}{d p} = \frac{N_x}{p} - \frac{n - N_x}{1 - p}.\] Setting
 equal to 0 and solving we see,
@@ -31,14 +31,15 @@ The second derivative of the log-likelihood is given as,
 \[ \frac{d^2 \ell}{d p^2} = \frac{-N_x}{p^2} - \frac{n - N_x}{(1 - p)^2}.\] Therefore, we can
 compute the Fisher Information as
 \begin{align*}
-    I_n(p) = -\E\left[\frac{-N_x}{p^2} - \frac{n - N_x}{(1 - p)^2} \middle\rvert p \right] &= 
-    \E\left[\frac{N_x}{p^2} + \frac{n - N_x}{(1 - p)^2} \middle\rvert p \right]\\
+    I_n(p) = -\E\left[\frac{-N_x}{p^2} - \frac{n - N_x}{(1 - p)^2} \middle\rvert p \right] = 
+    \E\left[\frac{N_x}{p^2} + \frac{n - N_x}{(1 - p)^2} \middle\rvert p \right]
     &= \E\left[\frac{N_x}{p^2} \middle\rvert p\right] + \E\left[\frac{n - N_x}{(1 - p)^2} \middle\rvert p \right] \\
     &= \frac{n p}{p^2} + \frac{n (1 - p)}{(1 - p)^2}\\
     &= \frac{n}{p} + \frac{n}{1 - p} \\
     &= \frac{n}{p(1 - p)}.
 \end{align*}
 \section*{1 (c)}
+Asymptotically Normal with mean XX and var XX.
 \section*{1 (d)}
 \section*{1 (e)}
 \section*{1 (f)}
@@ -47,9 +48,20 @@ compute the Fisher Information as
 \section*{2 (b)}
 \section*{2 (c)}
 
-\section*{3}
+\section*{3 (a)}
+The second derivative of $f(x)$ is given by, \[\frac{d^2 f}{d x^2} = -\frac{1}{x^2}.\] This new function
+is negative at all points other than 0, hence $f$ is concave.
+\section*{3 (b)}
+The second derivative of $f(x)$, \[\frac{d^2 f}{d x^2} = \frac{\exp(x)(1 - \exp(x))}{(1 +
+\exp(x))^3}.\] For values $x \leq 0$ then $f(x)$ will be non-negative; however, when $x > 0$
+$f(x)$ will be negative due to the $1 - \exp(x)$ term. Thus $f$ is neither concave nor convex.
 
 \section*{4 (a)}
+\[RSS(\beta) = (y - X\beta)^t(y - X\beta).\]
+\begin{align*}
+    \frac{\partial RSS^2}{\partial \beta \partial \beta} =
+\end{align*}
+
 \section*{4 (b)}
 \section*{4 (c)}
 \section*{4 (d)}
