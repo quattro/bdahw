@@ -14,8 +14,10 @@
 \author{Nick Mancuso}
 \maketitle
 
-\section{}
-\subsection*{(a)}
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item
 Let $N_x = \sum_i^n x_i$ denote the number of ``successes'' observed. We can write the
 likelihood of $p$ as \[ \mathcal{L}(p| X) = {n \choose N_x} p^{N_x} (1 - p)^{n - N_x}.\] In order
 to find the ML-estimate of the likelihood we perform the equivalent operation of maximizing the
@@ -28,7 +30,7 @@ equal to 0 and solving we see,
     \hat{p} = \frac{\sum_i^n x_i}{n}.
 \end{align*}
 
-\subsection*{(b)}
+\item
 The second derivative of the log-likelihood is given as, 
 \[ \frac{d^2 \ell}{d p^2} = \frac{-N_x}{p^2} - \frac{n - N_x}{(1 - p)^2}.\] Therefore, we can
 compute the Fisher Information as
@@ -40,28 +42,34 @@ compute the Fisher Information as
     &= \frac{n}{p} + \frac{n}{1 - p} \\
     &= \frac{n}{p(1 - p)}.
 \end{align*}
-\subsection*{(c)}
+\item
 The distribution of $\hat{p}$ is asymptotically Normal with mean $p$ and var $\frac{p(1 - p)}{n}$.
-\subsection*{(d)}
-\subsection*{(e)}
-\subsection*{(f)}
+\item
+\item
+\item
+\end{enumerate}
 
-\section{}
-\subsection*{(a)}
-\subsection*{(b)}
-\subsection*{(c)}
+\item
+\begin{enumerate}
+\item
+\item
+\item
+\end{enumerate}
 
-\section{}
-\subsection*{(a)}
+\item
+\begin{enumerate}
+\item
 The second derivative of $f(x)$ is given by, \[\frac{d^2 f}{d x^2} = -\frac{1}{x^2}.\] This new function
 is negative at all points other than 0, hence $f$ is concave.
-\subsection*{(b)}
+\item
 The second derivative of $f(x)$, \[\frac{d^2 f}{d x^2} = \frac{\exp(x)(1 - \exp(x))}{(1 +
 \exp(x))^3}.\] For values $x \leq 0$ then $f(x)$ will be non-negative; however, when $x > 0$
 $f(x)$ will be negative due to the $1 - \exp(x)$ term. Thus $f$ is neither concave nor convex.
+\end{enumerate}
 
-\section{}
-\subsection*{(a)}
+\item
+\begin{enumerate}
+\item
 The RSS can be written as norm of a linear function, which is the composition of two convex
 functions and hence is convex. However we will show more directly by second-order conditions.
 We define RSS using vector/matrix notation as, \[RSS(\beta) = (y - X\beta)^t(y - X\beta)\] whose
@@ -77,7 +85,7 @@ looking at the eigenvalues of $X^tX$. If the SVD of $X$ is $U^t\Sigma V$, then
 \] Note that this is a valid eigendecomposition whose eigenvalues are the diagonal elements of
 $\Sigma^2$, each of which $\sigma^2_i \geq 0$, thus $X^tX$ is positive semidefinite, and hence RSS is convex.
 
-\subsection*{(b)}
+\item
 All the expectations are conditional on $X$, however I've dropped them for notational simplicity.
 \begin{align*}
     \text{bias}(\hat{\beta}) &= \E[\hat{\beta} - \beta] = \E[(X^tX)^{-1}X^ty - \beta] = \E[(X^tX)^{-1}X^t(X\beta - \varepsilon)] - \beta \\
@@ -91,28 +99,31 @@ $\hat{\beta}$ as,
     & = (X^tX)^{-1}X^t \Var(\varepsilon) ((X^tX)^{-1}X^t)^t =  (X^tX)^{-1}X^t \E(\varepsilon \varepsilon^t) ((X^tX)^{-1}X^t)^t \\
     & = (X^tX)^{-1}X^t \sigma^2 I_n ((X^tX)^{-1}X^t)^t  = \sigma^2(X^tX)^{-1}
 \end{align*}
-\subsection*{(c)}
+\item
 Bias and variance for the predicted value $\hat{y}_*$ can be comptued by,
 \begin{align*}
     \text{bias}(\hat{y}_*) &= \E[\hat{y}_* - y] = \E[\hat{\beta}^t x_*] - \E[y] = \E[\hat{\beta}^t]x_* - \E[\beta^t x_* - \varepsilon] \\
     &= \E[\hat{\beta}^t]x_* - \beta^t x_* - \E[\varepsilon] = \beta^t x_* - \beta^t x_* - 0 = 0
 \end{align*} and
-\[\Var(\hat{y}_*) = \Var(\hat{y}_* - y) = \Var(\varepsilon) = \sigma^2 I.\]
-If we make the assumption that $\varepsilon_i \sim N(0, \sigma^2)$ then $\hat{y}_* \sim N(\hat{\beta}^t x_*, \sigma^2 I).$
+\[\Var(\hat{y}_*) = \Var(\hat{y}_* - y) = \Var(\varepsilon) = \sigma^2 (X^t X)^{-1}.\]
+If we make the assumption that $\varepsilon_i \sim N(0, \sigma^2)$ then $\hat{y}_* \sim N(\hat{\beta}^t x_*, \sigma^2 (X^t X)^{-1}).$
 
-\subsection*{(d)}
+\item
 The log-likelihood can be written as $\ell(\theta | X) \propto (y - X\beta)^t W^{-1} (y - X\beta)$
 where $W = \text{diag}(w_1, \dotsc, w_n)$ The MLE is given by solving for the root at the first derivative
 \[
     \frac{\partial \ell}{\partial \theta} = - 2 X^t W^{-1}(y - X\beta) \Leftrightarrow 
-     X^tW^{-1}X\beta = X^t W^{-1}y \Leftrightarrow \beta = (X^t W^{-1} X)^{-1} X^t W^{-1} y
+    X^tW^{-1}X\beta = X^t W^{-1}y \Leftrightarrow \hat{\beta} = (X^t W^{-1} X)^{-1} X^t W^{-1} y
  \]
+\end{enumerate}
 
 
-\section{}
-\subsection*{(a)}
-\subsection*{(b)}
-\subsection*{(c)}
-\subsection*{(d)}
-
+\item
+\begin{enumerate}
+\item
+\item
+\item
+\item
+\end{enumerate}
+\end{enumerate}
 \end{document}
