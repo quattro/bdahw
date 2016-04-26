@@ -5,6 +5,7 @@
 \def\E{\mathbb{E}}
 \def\N{\mathcal{N}}
 \def\I{\mathbb{I}}
+\def\Var{\text{Var}}
 
 \newtheorem{theorem}{Theorem}
 
@@ -57,12 +58,29 @@ The second derivative of $f(x)$, \[\frac{d^2 f}{d x^2} = \frac{\exp(x)(1 - \exp(
 $f(x)$ will be negative due to the $1 - \exp(x)$ term. Thus $f$ is neither concave nor convex.
 
 \section*{4 (a)}
-\[RSS(\beta) = (y - X\beta)^t(y - X\beta).\]
+The RSS can be written as norm of a linear function, which is the composition of two convex
+functions and hence is convex. However we will show more directly by second-order conditions.
+We define RSS using vector/matrix notation as, \[RSS(\beta) = (y - X\beta)^t(y - X\beta)\] whose
+second derivative is given by,
 \begin{align*}
-    \frac{\partial RSS^2}{\partial \beta \partial \beta} =
+    \frac{\partial RSS^2}{\partial \beta \partial \beta} = 2X^t X.
 \end{align*}
-
+Now, RSS is convex iff $x^tX^tXx \geq 0$ for any $x \in \mathbb{R}^n$. Let $Xx \triangleq u$, then
+$x^tX^tXx = u^t u = \sum_i u_i^2 \geq 0,$ hence RSS is convex.
 \section*{4 (b)}
+All the expectations are conditional on $X$, however I've dropped them for notational simplicity.
+\begin{align*}
+    \text{bias}(\hat{\beta}) &= \E[\hat{\beta} - \beta] = \E[(X^tX)^{-1}X^ty - \beta] = \E[(X^tX)^{-1}X^t(X\beta - \varepsilon)] - \beta \\
+    &= (X^tX)^{-1}X^tX\beta - (X^tX)^{-1}X^t\E[\varepsilon] - \beta = \beta - 0 - \beta  = 0.
+\end{align*}
+Before performing our variance calculations first note from our above calclations that
+$\hat{\beta} - \beta = (X^tX)^{-1}X^t \varepsilon.$ Now we can compute variance of our estimator
+$\hat{\beta}$ as,
+\begin{align*}
+    \Var(\hat{\beta}) & = \Var(\hat{\beta} - \beta) = \Var((X^tX)^{-1}X^t \varepsilon) \\
+    & = (X^tX)^{-1}X^t \Var(\varepsilon) ((X^tX)^{-1}X^t)^t =  (X^tX)^{-1}X^t \E(\varepsilon \varepsilon^t) ((X^tX)^{-1}X^t)^t \\
+    & = (X^tX)^{-1}X^t \sigma^2 I_n ((X^tX)^{-1}X^t)^t  = \sigma^2(X^tX)^{-1}
+\end{align*}
 \section*{4 (c)}
 \section*{4 (d)}
 
