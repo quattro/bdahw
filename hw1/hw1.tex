@@ -1,6 +1,7 @@
 \documentclass[10pt]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amsfonts,amsthm,amssymb,amsopn}
+\usepackage{graphicx}
 
 \def\E{\mathbb{E}}
 \def\N{\mathcal{N}}
@@ -8,6 +9,7 @@
 \def\Var{\text{Var}}
 
 \newtheorem{theorem}{Theorem}
+\graphicspath{figs/}
 
 \begin{document}
 \title{CM229: Homework 1}
@@ -121,9 +123,19 @@ where $W = \text{diag}(w_1, \dotsc, w_n)$ The MLE is given by solving for the ro
 \item
 \begin{enumerate}
 \item
+We can reject the null for (1-based indexing) phenotype 2 at SNP 258 ($p=1.13\text{E-92}$), phenotype
+3 at SNP 119 ($p=4.7\text{E-7}$) and phenotype 4 at SNP 43 ($p=1.08\text{E-8}$).
+\item
+
+\includegraphics[width=0.75\textwidth]{figs/qqplot.pdf}
+
 \item
 \item
-\item
+An alternative test for significance is to perform permutation tests where we permute phenotypes
+across individuals. This should, in theory, break association between genotype and phenotype. If 
+we observe the strength of association to lay in the tails of this empirical distribution we can
+be somewhat more confident that our association is not spurious. There are however, other
+confounding factors that could arise (Ancestry, batch effects, etc.).
 \end{enumerate}
 \end{enumerate}
 \end{document}
