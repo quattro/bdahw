@@ -14,7 +14,8 @@
 \author{Nick Mancuso}
 \maketitle
 
-\section*{1 (a)}
+\section{}
+\subsection*{(a)}
 Let $N_x = \sum_i^n x_i$ denote the number of ``successes'' observed. We can write the
 likelihood of $p$ as \[ \mathcal{L}(p| X) = {n \choose N_x} p^{N_x} (1 - p)^{n - N_x}.\] In order
 to find the ML-estimate of the likelihood we perform the equivalent operation of maximizing the
@@ -27,7 +28,7 @@ equal to 0 and solving we see,
     \hat{p} = \frac{\sum_i^n x_i}{n}.
 \end{align*}
 
-\section*{1 (b)}
+\subsection*{(b)}
 The second derivative of the log-likelihood is given as, 
 \[ \frac{d^2 \ell}{d p^2} = \frac{-N_x}{p^2} - \frac{n - N_x}{(1 - p)^2}.\] Therefore, we can
 compute the Fisher Information as
@@ -39,25 +40,28 @@ compute the Fisher Information as
     &= \frac{n}{p} + \frac{n}{1 - p} \\
     &= \frac{n}{p(1 - p)}.
 \end{align*}
-\section*{1 (c)}
-Asymptotically Normal with mean XX and var XX.
-\section*{1 (d)}
-\section*{1 (e)}
-\section*{1 (f)}
+\subsection*{(c)}
+The distribution of $\hat{p}$ is asymptotically Normal with mean $p$ and var $\frac{p(1 - p)}{n}$.
+\subsection*{(d)}
+\subsection*{(e)}
+\subsection*{(f)}
 
-\section*{2 (a)}
-\section*{2 (b)}
-\section*{2 (c)}
+\section{}
+\subsection*{(a)}
+\subsection*{(b)}
+\subsection*{(c)}
 
-\section*{3 (a)}
+\section{}
+\subsection*{(a)}
 The second derivative of $f(x)$ is given by, \[\frac{d^2 f}{d x^2} = -\frac{1}{x^2}.\] This new function
 is negative at all points other than 0, hence $f$ is concave.
-\section*{3 (b)}
+\subsection*{(b)}
 The second derivative of $f(x)$, \[\frac{d^2 f}{d x^2} = \frac{\exp(x)(1 - \exp(x))}{(1 +
 \exp(x))^3}.\] For values $x \leq 0$ then $f(x)$ will be non-negative; however, when $x > 0$
 $f(x)$ will be negative due to the $1 - \exp(x)$ term. Thus $f$ is neither concave nor convex.
 
-\section*{4 (a)}
+\section{}
+\subsection*{(a)}
 The RSS can be written as norm of a linear function, which is the composition of two convex
 functions and hence is convex. However we will show more directly by second-order conditions.
 We define RSS using vector/matrix notation as, \[RSS(\beta) = (y - X\beta)^t(y - X\beta)\] whose
@@ -66,8 +70,14 @@ second derivative is given by,
     \frac{\partial RSS^2}{\partial \beta \partial \beta} = 2X^t X.
 \end{align*}
 Now, RSS is convex iff $x^tX^tXx \geq 0$ for any $x \in \mathbb{R}^n$. Let $Xx \triangleq u$, then
-$x^tX^tXx = u^t u = \sum_i u_i^2 \geq 0,$ hence RSS is convex.
-\section*{4 (b)}
+$x^tX^tXx = u^t u = \sum_i u_i^2 \geq 0,$ hence RSS is convex. Another ``proof'' can be given by 
+looking at the eigenvalues of $X^tX$. If the SVD of $X$ is $U^t\Sigma V$, then 
+\[
+    X^tX = (U^t\Sigma V)^t (U^t\Sigma V) = V^t\Sigma U U^t\Sigma V = V^t \Sigma \Sigma V = V^t \Sigma^2 V.
+\] Note that this is a valid eigendecomposition whose eigenvalues are the diagonal elements of
+$\Sigma^2$, each of which $\sigma^2_i \geq 0$, thus $X^tX$ is positive semidefinite, and hence RSS is convex.
+
+\subsection*{(b)}
 All the expectations are conditional on $X$, however I've dropped them for notational simplicity.
 \begin{align*}
     \text{bias}(\hat{\beta}) &= \E[\hat{\beta} - \beta] = \E[(X^tX)^{-1}X^ty - \beta] = \E[(X^tX)^{-1}X^t(X\beta - \varepsilon)] - \beta \\
@@ -81,12 +91,28 @@ $\hat{\beta}$ as,
     & = (X^tX)^{-1}X^t \Var(\varepsilon) ((X^tX)^{-1}X^t)^t =  (X^tX)^{-1}X^t \E(\varepsilon \varepsilon^t) ((X^tX)^{-1}X^t)^t \\
     & = (X^tX)^{-1}X^t \sigma^2 I_n ((X^tX)^{-1}X^t)^t  = \sigma^2(X^tX)^{-1}
 \end{align*}
-\section*{4 (c)}
-\section*{4 (d)}
+\subsection*{(c)}
+Bias and variance for the predicted value $\hat{y}_*$ can be comptued by,
+\begin{align*}
+    \text{bias}(\hat{y}_*) &= \E[\hat{y}_* - y] = \E[\hat{\beta}^t x_*] - \E[y] = \E[\hat{\beta}^t]x_* - \E[\beta^t x_* - \varepsilon] \\
+    &= \E[\hat{\beta}^t]x_* - \beta^t x_* - \E[\varepsilon] = \beta^t x_* - \beta^t x_* - 0 = 0
+\end{align*} and
+\[\Var(\hat{y}_*) = \Var(\hat{y}_* - y) = \Var(\varepsilon) = \sigma^2 I.\]
+If we make the assumption that $\varepsilon_i \sim N(0, \sigma^2)$ then $\hat{y}_* \sim N(\hat{\beta}^t x_*, \sigma^2 I).$
 
-\section*{5 (a)}
-\section*{5 (b)}
-\section*{5 (c)}
-\section*{5 (d)}
+\subsection*{(d)}
+The log-likelihood can be written as $\ell(\theta | X) \propto (y - X\beta)^t W^{-1} (y - X\beta)$
+where $W = \text{diag}(w_1, \dotsc, w_n)$ The MLE is given by solving for the root at the first derivative
+\[
+    \frac{\partial \ell}{\partial \theta} = - 2 X^t W^{-1}(y - X\beta) \Leftrightarrow 
+     X^tW^{-1}X\beta = X^t W^{-1}y \Leftrightarrow \beta = (X^t W^{-1} X)^{-1} X^t W^{-1} y
+ \]
+
+
+\section{}
+\subsection*{(a)}
+\subsection*{(b)}
+\subsection*{(c)}
+\subsection*{(d)}
 
 \end{document}
