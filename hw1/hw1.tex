@@ -37,12 +37,10 @@ The second derivative of the log-likelihood is given as,
 \[ \frac{d^2 \ell}{d p^2} = \frac{-N_x}{p^2} - \frac{n - N_x}{(1 - p)^2}.\] Therefore, we can
 compute the Fisher Information as
 \begin{align*}
-    I_n(p) = -\E\left[\frac{-N_x}{p^2} - \frac{n - N_x}{(1 - p)^2} \middle\rvert p \right] = 
+    I_n(p) &= -\E\left[\frac{-N_x}{p^2} - \frac{n - N_x}{(1 - p)^2} \middle\rvert p \right] = 
     \E\left[\frac{N_x}{p^2} + \frac{n - N_x}{(1 - p)^2} \middle\rvert p \right]
-    &= \E\left[\frac{N_x}{p^2} \middle\rvert p\right] + \E\left[\frac{n - N_x}{(1 - p)^2} \middle\rvert p \right] \\
-    &= \frac{n p}{p^2} + \frac{n (1 - p)}{(1 - p)^2}\\
-    &= \frac{n}{p} + \frac{n}{1 - p} \\
-    &= \frac{n}{p(1 - p)}.
+    = \E\left[\frac{N_x}{p^2} \middle\rvert p\right] + \E\left[\frac{n - N_x}{(1 - p)^2} \middle\rvert p \right] \\
+    &= \frac{n p}{p^2} + \frac{n (1 - p)}{(1 - p)^2} = \frac{n}{p} + \frac{n}{1 - p} = \frac{n}{p(1 - p)}.
 \end{align*}
 \item
 The distribution of $\hat{p}$ is asymptotically Normal with mean $p$ and var $\frac{p(1 - p)}{n}$.
@@ -126,14 +124,23 @@ where $W = \text{diag}(w_1, \dotsc, w_n)$ The MLE is given by solving for the ro
 We can reject the null for (1-based indexing) phenotype 2 at SNP 258 ($p=1.13\text{E-92}$), phenotype
 3 at SNP 119 ($p=4.7\text{E-7}$) and phenotype 4 at SNP 43 ($p=1.08\text{E-8}$).
 \item
+The 1st, 3rd, and 4th phenotypes all show inflation in the tail. It is difficult to tell whether or
+not this is significant; however, with a bit more effort confidence intervals could be estimated and
+plotted alongside these.
 
 \includegraphics[width=0.75\textwidth]{figs/qqplot.pdf}
 
 \item
+The data in the 2nd and 3rd associations are not necessarily consistent with a linear model for
+trait. In particular the 2nd association looks to have outliers in the 0-case, whereas the 3rd
+association seems to be more consistent with a recessive model for trait.
+
+\includegraphics[width=0.75\textwidth]{figs/boxplot.pdf}
+
 \item
 An alternative test for significance is to perform permutation tests where we permute phenotypes
 across individuals. This should, in theory, break association between genotype and phenotype. If 
-we observe the strength of association to lay in the tails of this empirical distribution we can
+we observe the strength of association to lie in the tails of this empirical distribution we can
 be somewhat more confident that our association is not spurious. There are however, other
 confounding factors that could arise (Ancestry, batch effects, etc.).
 \end{enumerate}
