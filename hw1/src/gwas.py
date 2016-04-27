@@ -11,6 +11,7 @@ def main(args):
     argp = ap.ArgumentParser(description="")
     argp.add_argument("geno", type=ap.FileType("r"))
     argp.add_argument("pheno", type=ap.FileType("r"))
+    argp.add_argument("out_prefix")
     argp.add_argument("-o", "--output", type=ap.FileType("w"),
                       default=sys.stdout)
 
@@ -22,6 +23,7 @@ def main(args):
     pvals = [[] for _ in range(4)]
     lines = args.geno.readlines()
 
+    found = 0
     for idx, y in enumerate(ys.T):
         for sdx, line in enumerate(lines):
             snp = np.array(list(line.strip()), dtype=float)
@@ -29,6 +31,10 @@ def main(args):
             pvals[idx].append(pval)
             if pval < 0.05 / bcf:
                 print idx + 1, sdx + 1, pval
+                out = np.concatenate([np.c_[y], np.c_[snp]], axis=1)
+                fname = "{}.{}.dat".format(args.out_prefix, found)
+                np.savetxt(fname, out, fmt="%s")
+                found += 1
 
     pvals = np.array(pvals)
     np.savetxt(args.output, pvals.T, fmt="%s")
